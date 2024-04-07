@@ -10,7 +10,7 @@ export const useLoginForm = () => {
   }
 
   const { schema } = useLoginFormValidate()
-  const { form, onSubmit } = useForm({ schema, defaultValues: {}, cbSubmit: _onSubmit })
+  const { form, onSubmit } = useForm({ schema, defaultValues: { username: "", password: "" }, cbSubmit: _onSubmit })
 
   return {
     form,

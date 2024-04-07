@@ -1,11 +1,12 @@
 import LoginFormView from './loginForm.view'
 
-type Props = {}
+type LoginFormProps = {
+  openPopup: (typePopup: string) => void
+}
 
-const LoginForm = (props: Props) => {
+const LoginForm = ({ openPopup }: LoginFormProps) => {
   return (
-    <LoginFormView />
-
+    <LoginFormView openPopup={openPopup} />
   )
 }
 

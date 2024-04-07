@@ -80,6 +80,10 @@
   display: flex;
 }
 
+.login-side-container{
+  margin-top: 16rem;
+}
+
 .login-header-container{
   width: 50%;
   height: 100%;
@@ -104,11 +108,18 @@
 .login-form-head-container{
   width: 100%;
 }
+.popup-container{
+  padding-left: 6rem;
+  padding-right: 6rem
+}
 
 @media (max-width: 767px) {
   .login-flex {
     display: flex;
     flex-direction: column;
+  }
+  .login-side-container{
+    margin-top: 0rem;
   }
   .login-header-container{
     width: 100%;
@@ -133,5 +144,9 @@
   .login-form-head-container{
     width: 100%;
     padding: 0 1.5rem 0 1.5rem;
+  }
+  .popup-container{
+    padding: 10rem 2rem 10rem 2rem;
+    height: 100%;
   }
 }
