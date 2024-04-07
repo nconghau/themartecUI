@@ -2,14 +2,12 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { useLoginForm } from "./loginForm.hook"
-import { Form } from "react-hook-form"
+import { FormField, FormMessage, Form } from "@/components/ui/form"
 
 type LoginFormInputProps = {
   open: boolean,
@@ -18,7 +16,7 @@ type LoginFormInputProps = {
 
 const LoginFormInput = ({ open, closePopup }: LoginFormInputProps) => {
 
-  // const { form, onSubmit } = useLoginForm();
+  const { form, onSubmit } = useLoginForm();
 
   return (
     <Dialog open={open} onOpenChange={closePopup}>
@@ -38,13 +36,43 @@ const LoginFormInput = ({ open, closePopup }: LoginFormInputProps) => {
         </div>
 
         <div className="grid gap-4 py-1">
-          <Input id="username" placeholder="Phone, email, or username" />
-          <Input id="password" placeholder="Password" />
+          <Form {...form}>
+            <form className="" onSubmit={onSubmit}>
+              <FormField
+                name="username"
+                control={form.control}
+                render={({ field }) => (
+                  <>
+                    <Input
+                      placeholder="Phone, email, or username"
+                      {...field}
+                    />
+                    <FormMessage className="errorMessage" />
+                  </>
+                )}
+              />
+              <div className="mt-4">
+                <FormField
+                  name="password"
+                  control={form.control}
+                  render={({ field }) => (
+                    <>
+                      <Input
+                        type="password"
+                        placeholder="Enter password"
+                        {...field}
+                      />
+                      <FormMessage className="errorMessage" />
+                    </>
+                  )}
+                />
+              </div>
+              <Button className='rounded-3xl w-full mt-4'>
+                Sign in
+              </Button>
+            </form>
+          </Form>
         </div>
-
-        <Button className='rounded-3xl w-full'>
-          Sign in
-        </Button>
         <Button variant="outline" className='flex items-center bg-transparent text-black border border-gray-400 rounded-3xl w-full'>
           Forgot password?
         </Button>

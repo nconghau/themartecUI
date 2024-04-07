@@ -2,13 +2,12 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
-  DialogTitle,
+  DialogTitle
 } from "@/components/ui/dialog"
+import { Form, FormField, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { useSignupForm } from "./signupForm.hook"
 
 type SignupFormInputProps = {
   open: boolean
@@ -16,6 +15,9 @@ type SignupFormInputProps = {
 }
 
 const SignupFormInput = ({ open, closePopup }: SignupFormInputProps) => {
+
+  const { form, onSubmit } = useSignupForm();
+
   return (
     <Dialog open={open} onOpenChange={closePopup}>
       <DialogContent className="popup-container">
@@ -25,14 +27,59 @@ const SignupFormInput = ({ open, closePopup }: SignupFormInputProps) => {
         </DialogHeader>
 
         <div className="grid gap-4 py-1">
-          <Input id="username" placeholder="Email" />
-          <Input id="name" placeholder="Name" />
-          <Input id="phone" placeholder="Phone" />
+          <Form {...form}>
+            <form className="" onSubmit={onSubmit}>
+              <FormField
+                name="username"
+                control={form.control}
+                render={({ field }) => (
+                  <>
+                    <Input
+                      placeholder="Username or Email"
+                      {...field}
+                    />
+                    <FormMessage className="errorMessage" />
+                  </>
+                )}
+              />
+              <div className="mt-4">
+                <FormField
+                  name="phone"
+                  control={form.control}
+                  render={({ field }) => (
+                    <>
+                      <Input
+                        placeholder="Phone"
+                        {...field}
+                      />
+                      <FormMessage className="errorMessage" />
+                    </>
+                  )}
+                />
+              </div>
+              <div className="mt-4">
+                <FormField
+                  name="password"
+                  control={form.control}
+                  render={({ field }) => (
+                    <>
+                      <Input
+                        type="password"
+                        placeholder="Enter password"
+                        {...field}
+                      />
+                      <FormMessage className="errorMessage" />
+                    </>
+                  )}
+                />
+              </div>
+              <Button className='rounded-3xl w-full mt-4'>
+                Sign up
+              </Button>
+            </form>
+          </Form>
         </div>
 
-        <Button className='rounded-3xl w-full'>
-          Sign up
-        </Button>
         <div className="pb-10"></div>
       </DialogContent>
     </Dialog>

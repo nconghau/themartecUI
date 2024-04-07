@@ -12,13 +12,10 @@ const useForm = (props: UseFormProps) => {
     defaultValues: defaultValues
   })
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof schema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+  const onSubmit = form.handleSubmit((values: z.infer<typeof schema>) => {
     cbSubmit(values);
-  }
+  })
+
   return {
     form,
     onSubmit
